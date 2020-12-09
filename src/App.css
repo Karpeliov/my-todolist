@@ -1,0 +1,58 @@
+.Main-container {
+
+  position: absolute;
+  margin: 0px auto;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url(https://www.netcarshow.com/Audi-RS5_Sportback-2020-1600-03.jpg);
+  /*background-color: #e2e2a0;*/
+}
+
+.App {
+  padding: 30px;
+  display: flex;
+
+}
+
+.App > div {
+  margin-right: 50px;
+}
+
+.error {
+  border: red 2px solid;
+}
+
+.error-message {
+  color: red;
+}
+
+.active-filter {
+  background-color: #e7e70b;
+  border-radius: 10px;
+  outline: none;
+}
+
+button {
+  background-color: #11c3d7;
+  margin: 5px;
+  border-radius: 10px;
+  outline: none;
+}
+
+.is-Done {
+  opacity: 0.5;
+}
+
+.one-list {
+  /*background-color: #dddd89 ;*/
+  border-radius: 15px;
+  border: 1px solid black;
+  background: rgba(100, 250, 250, 0.25)
+}
+
+.one-list input  {
+  margin-left: 2px;
+}
+
