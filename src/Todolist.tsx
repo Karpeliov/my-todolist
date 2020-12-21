@@ -1,5 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType, TaskType} from "./App";
+import {AddItemForm} from "./AddItemForm";
+import {EditableSpan} from './EditableSpan';
 
 type PropsType = {
     id: string
@@ -11,72 +13,64 @@ type PropsType = {
     addTask: (title: string, todoListId: string) => void
     changeStatus: (taskId: string, isDone: boolean, todoListId: string) => void
     removeTodoList: (todoListId: string) => void
-
+    changeTaskTitle: (title: string, taskId: string, todoListId: string) => void
+    changeListTitle: (todoListId: string, title: string) => void
 }
 
 export function Todolist(props: PropsType) {
 
-    // для импута. Изначально пустая строка. Вписанное записывается в setTitle,
-    // а потом записывается в title
     const [title, setTitle] = useState<string>("")
     const [error, setError] = useState<string | null>(null)
+
 
     const tasks = props.tasks.map(taskObj => {
         const changeStatus = (e: ChangeEvent<HTMLInputElement>) => {
             props.changeStatus(taskObj.id, e.currentTarget.checked, props.id)
         }
+        const onClickHandler = () => {
+            props.removeTask(taskObj.id, props.id)
+        }
+        const changeTaskTitle = (title: string) => {
+            props.changeTaskTitle(title, taskObj.id, props.id)
+        }
+
         return (
-            <li key={taskObj.id} className={taskObj.isDone ? "is-Done" : ""}>
+
+            <li key={taskObj.id} className={taskObj.isDone ? "is-Done" : "tasks"}>
                 <input onChange={changeStatus} type="checkbox" checked={taskObj.isDone}/>
-                <span>{taskObj.title}</span>
-                <button onClick={() => {
-                    props.removeTask(taskObj.id, props.id)
-                }}>x
+                <EditableSpan value={taskObj.title} sendNewTitle={changeTaskTitle}/>
+                {/*<span>{taskObj.title}</span>*/}
+                <button className={"deleteTask"} onClick={onClickHandler}>x
                 </button>
             </li>
         )
     })
 
     //функция в кнопку +
-    const addTask = () => {
-        const trimmedTitle = title.trim()  //обрезает пробелы в начале и в конце строки
-        if (trimmedTitle) {
-            props.addTask(trimmedTitle, props.id)
-
-        } else {
-            setError("Title is required!")
-
-        }
-        setTitle("")
+    const addTask = (title: string) => {
+        props.addTask(title, props.id)
     }
-
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setError(null)
-        setTitle(e.currentTarget.value)
-    }
-
-    const onKayPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") addTask()
+    const changeListTitle = (title: string) => {
+        props.changeListTitle(props.id, title)
+        // на этом этаме мы уже можем передать todoListId: string,
+        // который равен props.id
+        // title: string получаем от EditableSpan
+        // иначе пришлось бы передавать в EditableSpan props.id, чтобы вставить его там в колбэк.
+        //Т.е гонять данные туда сюда
     }
 
     return <div className={"one-list"}>
-        <h3>{props.title}
-            <button onClick={() => props.removeTodoList(props.id)}>Delete This List</button>
+        <h3>
+            <EditableSpan sendNewTitle={changeListTitle} value={props.title}/>
+
         </h3>
-        <div>
-            <input
-                value={title}
-                onChange={onChangeHandler}
-                onKeyPress={onKayPressHandler}
-                className={error ? "error" : ""}
-            />
-            <button onClick={addTask}>+</button>
-            {error && <div className={"error-message"}> {error} </div>}
-        </div>
-        <ul>
+        <button className={"deleteListBtn"} onClick={() => props.removeTodoList(props.id)}>X</button>
+        <AddItemForm addItem={addTask}/>
+        <ul >
             {tasks}
         </ul>
-        <div>
+
+        <div className={"filter-buttons"}>
             <button className={(props.filter === "all") ? "active-filter" : ""} onClick={() => {
                 props.changeFilter("all", props.id)
             }}>All
