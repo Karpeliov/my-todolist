@@ -1,7 +1,10 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import {FilterValuesType, TaskType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from './EditableSpan';
+import Styles from './Todolist.module.css'
+import {Button, ButtonGroup, Checkbox, IconButton} from "@material-ui/core";
+import {Delete, DeleteForever, DeleteOutline} from "@material-ui/icons";
 
 type PropsType = {
     id: string
@@ -19,8 +22,8 @@ type PropsType = {
 
 export function Todolist(props: PropsType) {
 
-    const [title, setTitle] = useState<string>("")
-    const [error, setError] = useState<string | null>(null)
+    // const [title, setTitle] = useState<string>("")
+    // const [error, setError] = useState<string | null>(null)
 
 
     const tasks = props.tasks.map(taskObj => {
@@ -36,12 +39,14 @@ export function Todolist(props: PropsType) {
 
         return (
 
-            <li key={taskObj.id} className={taskObj.isDone ? "is-Done" : "tasks"}>
-                <input onChange={changeStatus} type="checkbox" checked={taskObj.isDone}/>
+            <li key={taskObj.id} className={taskObj.isDone ? Styles.isDone : Styles.tasks} style={{margin: "0"}}>
+                <Checkbox size={"small"} color={"primary"} onChange={changeStatus} checked={taskObj.isDone}/>
+                {/*<input onChange={changeStatus} type="checkbox" checked={taskObj.isDone}/>*/}
                 <EditableSpan value={taskObj.title} sendNewTitle={changeTaskTitle}/>
                 {/*<span>{taskObj.title}</span>*/}
-                <button className={"deleteTask"} onClick={onClickHandler}>x
-                </button>
+                <IconButton className={"deleteTask"} onClick={onClickHandler}> <Delete/> </IconButton>
+                {/*<button className={"deleteTask"} onClick={onClickHandler}>x*/}
+                {/*</button>*/}
             </li>
         )
     })
@@ -60,31 +65,46 @@ export function Todolist(props: PropsType) {
     }
 
     return <div className={"one-list"}>
-        <h3>
+        <h2>
             <EditableSpan sendNewTitle={changeListTitle} value={props.title}/>
+            <IconButton size={"medium"} onClick={() => props.removeTodoList(props.id)}> <Delete/> </IconButton>
+        </h2>
+        {/*<button className={"deleteListBtn"} onClick={() => props.removeTodoList(props.id)}>X</button>*/}
 
-        </h3>
-        <button className={"deleteListBtn"} onClick={() => props.removeTodoList(props.id)}>X</button>
         <AddItemForm addItem={addTask}/>
-        <ul >
+        <ul style={{listStyleType: "none", padding: "0"}}>
             {tasks}
         </ul>
 
-        <div className={"filter-buttons"}>
-            <button className={(props.filter === "all") ? "active-filter" : ""} onClick={() => {
-                props.changeFilter("all", props.id)
-            }}>All
-            </button>
-            <button className={(props.filter === "active") ? "active-filter" : ""} onClick={() => {
-                props.changeFilter("active", props.id)
-            }}>Active
-            </button>
-            <button className={(props.filter === "completed") ? "active-filter" : ""} onClick={() => {
-                props.changeFilter("completed", props.id)
-            }}>Completed
-            </button>
+        <div >
+            <ButtonGroup size={"medium"} color={"primary"}>
+                <Button // className={(props.filter === "all") ? "active-filter" : ""}
+                    variant={(props.filter === "all") ? "outlined" : "contained"}
+                    // color={"default"}
+                    onClick={() => {
+                        props.changeFilter("all", props.id)
+                    }}>
+                    All
+                </Button>
+                <Button // className={(props.filter === "active") ? "active-filter" : ""}
+                    variant={(props.filter === "active") ? "outlined" : "contained"}
+                    // color={"secondary"}
+                    onClick={() => {
+                        props.changeFilter("active", props.id)
+                    }}>
+                    Active
+                </Button>
+                <Button //className={(props.filter === "completed") ? "active-filter" : ""}
+                    variant={(props.filter === "completed") ? "outlined" : "contained"}
+                    // color={"primary"}
+                    onClick={() => {
+                        props.changeFilter("completed", props.id)
+                    }}>
+                    Completed
+                </Button>
+            </ButtonGroup>
         </div>
     </div>
 }
 
-export default Todolist;
+

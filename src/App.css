@@ -1,87 +1,73 @@
-.Main-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    margin: 0 auto;
-    background: url(https://www.netcarshow.com/Audi-RS5_Sportback-2020-1600-03.jpg);
-    /*background-color: #e2e2a0;*/
-}
+/*.Main-container {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100vw;*/
+/*    height: 100vh;*/
+/*    margin: 0 auto;*/
+/*    !*background: url(https://www.netcarshow.com/Audi-RS5_Sportback-2020-1600-03.jpg);*!*/
+/*    !*background-color: #e2e2a0;*!*/
+/*}*/
 
-button {
-    background-color: #11c3d7;
-    margin: 5px;
-    border-radius: 10px;
-    outline: none;
-}
+/*button {*/
+/*    margin: 5px;*/
+/*    border-radius: 10px;*/
+/*    outline: none;*/
+/*    background-color: #11c3d7;*/
+/*}*/
 
-.App {
-    display: flex;
-    padding: 20px;
-}
+/*.App {*/
+/*    display: flex;*/
+/*    padding: 20px;*/
+/*}*/
 
-.App > div {
-    margin-right: 5px;
-}
+/*.App > div {*/
+/*    margin-right: 5px;*/
+/*}*/
 
-.error {
-    border: red 2px solid;
-}
+/*.error {*/
+/*    border: red 2px solid;*/
+/*}*/
 
-.error-message {
-    color: red;
-}
+/*.error-message {*/
+/*    color: red;*/
+/*}*/
 
-.filter-buttons {
-    position: absolute;
-    bottom: 5px;
-    margin-top: 10px;
-}
+/*!*.filter-buttons {*!*/
+/*!*    position: absolute;*!*/
+/*!*    bottom: 5px;*!*/
+/*!*    margin-top: 10px;*!*/
+/*!*}*!*/
 
-.active-filter {
-    border-radius: 10px;
-    outline: none;
-    background-color: #e7e70b;
-}
+/*.active-filter {*/
+/*    border-radius: 10px;*/
+/*    outline: none;*/
+/*    background-color: #e7e70b;*/
+/*}*/
 
-.deleteListBtn {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-}
+/*.deleteListBtn {*/
+/*    position: absolute;*/
+/*    top: 5px;*/
+/*    right: 5px;*/
+/*}*/
 
-.deleteTask {
-    position: absolute;
-    right: 5px;
-}
+/*.deleteTask {*/
+/*    position: absolute;*/
+/*    right: 5px;*/
+/*}*/
 
-.tasks {
-    margin-top: 5px;
+/*ul {*/
+/*    margin-bottom: 50px;*/
+/*}*/
 
-}
+/*.one-list {*/
+/*    position: relative;*/
+/*    border: 1px solid black;*/
+/*    border-radius: 15px;*/
+/*    !*background: rgba(100, 250, 250, .25);*!*/
+/*}*/
 
-.is-Done {
-    /*ДУБЛИРОВАНИЕ!!!!*/
-    margin-top: 5px;
-    opacity: .5;
-    /*НЕ РАБОТАЕТ!!!!*/
-    /*composes: tasks;*/
-}
-
-ul {
-    margin-bottom: 50px;
-}
-
-.one-list {
-
-    position: relative;
-    border: 1px solid black;
-    border-radius: 15px;
-    background: rgba(100, 250, 250, .25);
-}
-
-.one-list input {
-    margin-left: 2px;
-}
+/*.one-list input {*/
+/*    margin-left: 2px;*/
+/*}*/
 

@@ -1,0 +1,11 @@
+
+.tasks {
+    margin-top: 5px;
+}
+
+.isDone {
+    opacity: .5;
+
+    composes: tasks;
+}
+
