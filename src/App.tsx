@@ -14,13 +14,13 @@ export type TaskType = {
 
 export type FilterValuesType = "all" | "active" | "completed"
 
-type TodoListType = {
+export type TodoListType = {
     id: string
     title: string
     filter: FilterValuesType
 }
 
-type taskStateType = {
+export type taskStateType = {
     [key: string]: Array<TaskType>
 }
 
@@ -94,7 +94,6 @@ function App() {
         if (task) {
             task.title = title
             setTasks({...tasks})
-            console.log(tasks)
         }
     }
 
@@ -105,7 +104,6 @@ function App() {
             setTodoLists([...todoLists])
         }
     }
-
 
     function removeTodoList(todoListId: string) {
         todoLists = todoLists.filter((tl) => tl.id !== todoListId)
@@ -148,21 +146,22 @@ function App() {
                             }
                             return (
                                 <Grid item>
-                                    <Paper elevation={7} style={{padding: "15px", backgroundColor: "#e7ffff", borderRadius: "10px"}} >
+                                    <Paper elevation={7}
+                                           style={{padding: "15px", backgroundColor: "#e7ffff", borderRadius: "10px"}}>
                                         <Todolist
-                                        key={t.id}
-                                        id={t.id}
-                                        title={t.title}
-                                        tasks={taskForTodoList}
-                                        filter={t.filter}
-                                        removeTask={removeTask}
-                                        changeFilter={changeFilter}
-                                        addTask={addTask}
-                                        changeStatus={changeStatus}
-                                        removeTodoList={removeTodoList}
-                                        changeTaskTitle={changeTaskTitle}
-                                        changeListTitle={changeListTitle}
-                                    />
+                                            key={t.id}
+                                            id={t.id}
+                                            title={t.title}
+                                            tasks={taskForTodoList}
+                                            filter={t.filter}
+                                            removeTask={removeTask}
+                                            changeFilter={changeFilter}
+                                            addTask={addTask}
+                                            changeStatus={changeStatus}
+                                            removeTodoList={removeTodoList}
+                                            changeTaskTitle={changeTaskTitle}
+                                            changeListTitle={changeListTitle}
+                                        />
                                     </Paper>
                                 </Grid>
                             )
