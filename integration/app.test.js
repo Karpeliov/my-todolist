@@ -2,7 +2,7 @@
 describe('AddItemForm', () => {
     it('base example, visually looks correct', async () => {
         // APIs from jest-puppeteer
-        await page.goto('http://192.168.0.112:9009//iframe.html?id=todolist-additemform--add-item-form-example');
+        await page.goto('http://localhost:9009/iframe.html?id=todolist-additemform--add-item-form-example&viewMode=story');
         const image = await page.screenshot();
 
         // API from jest-image-snapshot
