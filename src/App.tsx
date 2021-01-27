@@ -20,7 +20,7 @@ export type TodoListType = {
     filter: FilterValuesType
 }
 
-export type taskStateType = {
+export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
 
@@ -35,7 +35,7 @@ function App() {
         {id: todoListID2, title: "What to buy", filter: "all"}
     ])
 
-    let [tasks, setTasks] = useState<taskStateType>({
+    let [tasks, setTasks] = useState<TaskStateType>({
         [todoListID1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
@@ -131,10 +131,10 @@ function App() {
                 </Toolbar>
             </AppBar>
             <Container fixed={true}>
-                <Grid container={true} style={{padding: "15px"}}>
+                <Grid container={true} style={{padding: "15px"}} >
                     <AddItemForm addItem={addList}/>
                 </Grid>
-                <Grid container={true} spacing={5}>
+                <Grid container={true} spacing={5} >
                     {
                         todoLists.map((t) => {
                             let taskForTodoList = tasks[t.id]
@@ -145,7 +145,7 @@ function App() {
                                 taskForTodoList = tasks[t.id].filter(task => task.isDone)
                             }
                             return (
-                                <Grid item>
+                                <Grid item key={t.id}>
                                     <Paper elevation={7}
                                            style={{padding: "15px", backgroundColor: "#e7ffff", borderRadius: "10px"}}>
                                         <Todolist

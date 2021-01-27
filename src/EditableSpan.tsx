@@ -1,15 +1,15 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {TaskType} from './App';
+import React, {useState} from 'react';
+
 import {TextField} from "@material-ui/core";
 
-type EditableSpanPropsType = {
+export type EditableSpanPropsType = {
     value: string
     sendNewTitle: (title: string) => void
 }
 
 
 export function EditableSpan(props: EditableSpanPropsType) {
-
+    console.log("EditableSpan")
     const [editMode, setEditMode] = useState(false)
     const [title, setTitle] = useState(props.value)
 

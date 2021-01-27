@@ -24,10 +24,12 @@ export type ChangeFilter = {
     todoListId: string
 }
 
+const initialState: Array<TodoListType> = []
+
 type ActionType = RemoveTodoListActionType | AddListActionType |
     ChangeListTitleActionType | ChangeFilter
 
-export const todoListsReducer = (state: Array<TodoListType>, action: ActionType) => {
+export const todoListsReducer = (state: Array<TodoListType> = initialState, action: ActionType): Array<TodoListType> => {
     switch (action.type) {
         case "REMOVE-TODOLIST":
             return state.filter((tl) => tl.id !== action.todoListId)
@@ -51,13 +53,12 @@ export const todoListsReducer = (state: Array<TodoListType>, action: ActionType)
             }
         }
         default:
-            //return state
-            throw new Error("Unknown action!")
+            return state
+           // throw new Error("Unknown action!")
     }
 }
 
 export const RemoveTodoListAC = (todoListID: string): RemoveTodoListActionType => {
-    // можно запросить сервак
     return {
         type: "REMOVE-TODOLIST",
         todoListId: todoListID
@@ -69,7 +70,7 @@ export const AddTodoListsAC = (newTodolistTitle: string): AddListActionType => {
         type: 'ADD-LIST',
         title: newTodolistTitle,
         todolistId: v1()
-}
+    }
 }
 
 export const ChangeTodoListsAC = (newTodolistTitle: string, todolistId: string): ChangeListTitleActionType => {

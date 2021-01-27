@@ -1,4 +1,4 @@
-import {FilterValuesType, taskStateType, TaskType, TodoListType} from '../App'
+import {TaskStateType, TaskType} from '../App'
 import {v1} from "uuid";
 import {AddListActionType, RemoveTodoListActionType} from "./todolists-reducer";
 
@@ -28,12 +28,13 @@ export type ChangeTaskTitleType = {
     todoListId: string
 }
 
+const initialState: TaskStateType = {}
 
 type ActionType = RemoveTaskActionType | AddTaskActionType |
     ChangeTaskStatusType | ChangeTaskTitleType | AddListActionType | RemoveTodoListActionType
 
 
-export const tasksReducer = (state: taskStateType, action: ActionType) => {
+export const tasksReducer = (state: TaskStateType = initialState, action: ActionType): TaskStateType => {
     switch (action.type) {
         case "REMOVE_TASK": {
             let stateCopy = {...state}
@@ -53,13 +54,25 @@ export const tasksReducer = (state: taskStateType, action: ActionType) => {
         }
 
         case "CHANGE_STATUS": {
-            let stateCopy = {...state}
-            const task = stateCopy[action.todoListId].find(t => t.id === action.taskId)
-            if (task) {
-                task.isDone = action.isDone
+            // let stateCopy = {...state}
+            // const task = stateCopy[action.todoListId].find(t => t.id === action.taskId)
+            // if (task) {
+            //     task.isDone = action.isDone
+            // }
+            // return stateCopy
+            return {
+                ...state,
+                [action.todoListId]: state[action.todoListId]
+                    .map(t => {
+                        if (t.id !== action.taskId) {
+                            return {...t}
+                        } else {
+                            return {...t, isDone: action.isDone}
+                        }
+                    })
             }
-            return stateCopy
         }
+
 
         case "CHANGE_TITLE": {
             let stateCopy = {...state}
@@ -78,14 +91,14 @@ export const tasksReducer = (state: taskStateType, action: ActionType) => {
         }
         case "REMOVE-TODOLIST": {
             let stateCopy = {...state}
-                delete stateCopy[action.todoListId]
-                return stateCopy
+            delete stateCopy[action.todoListId]
+            return stateCopy
 
         }
 
         default:
             return state
-            throw new Error("Unknown action!")
+        // throw new Error("Unknown action!")
 
     }
 }
